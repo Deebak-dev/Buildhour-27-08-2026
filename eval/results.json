@@ -1,0 +1,128 @@
+{
+  "generated_at": "2026-09-27T10:55:45+00:00",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b",
+  "ks": [
+    1,
+    3,
+    5,
+    10
+  ],
+  "notes": [
+    "2 of 25 rows returned a non-answer (degraded). Of those, 0 were genuine generation failures (no API key, provider error, or rate limit) and 2 were the contract working correctly: a gate downgrade or a 'not in my sources' refusal. Contract checks on either kind of row measure the refusal path, not answer quality.",
+    "No row failed because of a provider outage. Any non-answer here is a deliberate refusal."
+  ],
+  "suites": {
+    "adversarial": {
+      "n": 15,
+      "passed": 15,
+      "pass_rate": 1.0,
+      "degraded": 0,
+      "service_failures": 0,
+      "retrieval_checks": {
+        "passed": 20,
+        "total": 20,
+        "pass_rate": 1.0
+      }
+    },
+    "golden": {
+      "n": 10,
+      "passed": 5,
+      "pass_rate": 0.5,
+      "degraded": 2,
+      "service_failures": 0,
+      "retrieval_checks": {
+        "passed": 24,
+        "total": 29,
+        "pass_rate": 0.8276
+      },
+      "generation_checks": {
+        "passed": 40,
+        "total": 49,
+        "pass_rate": 0.8163
+      },
+      "recall@1": 0.6,
+      "recall@1_hits": "6/10",
+      "recall@3": 0.6,
+      "recall@3_hits": "6/10",
+      "recall@5": 0.6,
+      "recall@5_hits": "6/10",
+      "recall@10": 0.6,
+      "recall@10_hits": "6/10"
+    }
+  },
+  "overall_pass_rate": 0.8,
+  "overall_passed": 20,
+  "overall_n": 25,
+  "latency_ms": {
+    "p50": 3.04,
+    "p95": 3966.51,
+    "mean": 1337.17
+  },
+  "failures": [
+    {
+      "suite": "golden",
+      "id": "q02",
+      "query": "exit load on HDFC Equity Fund - Direct Growth",
+      "route": "FACTUAL",
+      "degraded": false,
+      "service_failure": false,
+      "reasons": [
+        "cited_answer_is_not_a_refusal: prose refuses to answer but a Source: line was rendered, so a non-answer reads as an evidenced one"
+      ]
+    },
+    {
+      "suite": "golden",
+      "id": "q04",
+      "query": "lock-in period for HDFC ELSS Tax Saver Fund",
+      "route": "FACTUAL",
+      "degraded": false,
+      "service_failure": false,
+      "reasons": [
+        "cited_answer_is_not_a_refusal: prose refuses to answer but a Source: line was rendered, so a non-answer reads as an evidenced one",
+        "top_chunk_field_type: top chunk is 'scheme_type', want 'lock_in'"
+      ]
+    },
+    {
+      "suite": "golden",
+      "id": "q07",
+      "query": "how do I download my capital gains statement",
+      "route": "OUT_OF_SCOPE",
+      "degraded": false,
+      "service_failure": false,
+      "reasons": [
+        "route_is_factual: got OUT_OF_SCOPE",
+        "cited_answer_is_not_a_refusal: prose refuses to answer but a Source: line was rendered, so a non-answer reads as an evidenced one",
+        "top_chunk_field_type: top chunk is None, want 'statement_guide'"
+      ]
+    },
+    {
+      "suite": "golden",
+      "id": "q08",
+      "query": "section 80C limit for HDFC ELSS Tax Saver Fund",
+      "route": "FACTUAL",
+      "degraded": true,
+      "service_failure": false,
+      "reasons": [
+        "one_source_line: found 0 'Source:' line(s)",
+        "has_freshness_line: freshness line missing",
+        "citation_matches_expected: got ['<none>'], want ['https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth']",
+        "top_chunk_field_type: top chunk is 'scheme_type', want 'tax_benefit'"
+      ]
+    },
+    {
+      "suite": "golden",
+      "id": "q10",
+      "query": "direct plan vs regular plan expense ratio HDFC Large Cap",
+      "route": "FACTUAL",
+      "degraded": true,
+      "service_failure": false,
+      "reasons": [
+        "one_source_line: found 0 'Source:' line(s)",
+        "has_freshness_line: freshness line missing",
+        "citation_matches_expected: got ['<none>'], want ['https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth']",
+        "top_chunk_field_type: top chunk is 'riskometer', want 'direct_vs_regular'"
+      ]
+    }
+  ]
+}

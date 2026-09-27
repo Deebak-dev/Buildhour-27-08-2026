@@ -1,0 +1,10 @@
+{"id":"q01","query":"expense ratio of HDFC Large Cap Fund - Direct Growth","scheme":"hdfc_large_cap","expect_field_type":"expense_ratio","expect_source_url":"https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth"}
+{"id":"q02","query":"exit load on HDFC Equity Fund - Direct Growth","scheme":"hdfc_flexi_cap","expect_field_type":"exit_load","expect_source_url":"https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth"}
+{"id":"q03","query":"minimum SIP for HDFC ELSS Tax Saver Fund - Direct Growth","scheme":"hdfc_elss","expect_field_type":"min_sip","expect_source_url":"https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth"}
+{"id":"q04","query":"lock-in period for HDFC ELSS Tax Saver Fund","scheme":"hdfc_elss","expect_field_type":"lock_in","expect_source_url":"https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth"}
+{"id":"q05","query":"benchmark of HDFC Balanced Advantage Fund - Direct Growth","scheme":"hdfc_balanced_advantage","expect_field_type":"benchmark","expect_source_url":"https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth"}
+{"id":"q06","query":"current riskometer level of HDFC Small Cap Fund","scheme":"hdfc_small_cap","expect_field_type":"riskometer","expect_source_url":"https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth"}
+{"id":"q07","query":"how do I download my capital gains statement","scheme":null,"expect_field_type":"statement_guide","expect_source_url":null}
+{"id":"q08","query":"section 80C limit for HDFC ELSS Tax Saver Fund","scheme":"hdfc_elss","expect_field_type":"tax_benefit","expect_source_url":"https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth"}
+{"id":"q09","query":"who manages HDFC Large Cap Fund","scheme":"hdfc_large_cap","expect_field_type":"fund_manager","expect_source_url":"https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth"}
+{"id":"q10","query":"direct plan vs regular plan expense ratio HDFC Large Cap","scheme":"hdfc_large_cap","expect_field_type":"direct_vs_regular","expect_source_url":"https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth"}

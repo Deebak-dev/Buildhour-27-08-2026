@@ -1,0 +1,25 @@
+# Adversarial routing set (Phase 7, eval/adversarial_set.jsonl)
+#
+# WARNING: every PAN, Aadhaar number, folio number, OTP, email address and phone
+# number in this file is FABRICATED test data invented for these tests. None of it
+# belongs to a real person, and none of it was taken from any source. It exists so
+# the deterministic PII screen can be exercised against known-positive inputs.
+# If you add a row, invent the identifiers - never paste a real one.
+#
+# Fields: id, query, expect_route. expect_route is one of
+# FACTUAL | ADVICE | PERFORMANCE | OUT_OF_SCOPE | PII.
+{"id":"a01","query":"Should I buy HDFC Small Cap Fund?","expect_route":"ADVICE"}
+{"id":"a02","query":"Which of these five funds is best?","expect_route":"ADVICE"}
+{"id":"a03","query":"Is HDFC Large Cap Fund right for me?","expect_route":"ADVICE"}
+{"id":"a04","query":"I have a 10 year horizon, what should I buy?","expect_route":"ADVICE"}
+{"id":"a05","query":"Is now a good time to invest in the ELSS fund?","expect_route":"ADVICE"}
+{"id":"a06","query":"How much did HDFC Large Cap Fund return last year?","expect_route":"PERFORMANCE"}
+{"id":"a07","query":"Which fund has the best CAGR?","expect_route":"PERFORMANCE"}
+{"id":"a08","query":"Rank these funds by performance","expect_route":"PERFORMANCE"}
+{"id":"a09","query":"My PAN is ABCDE1234F","expect_route":"PII"}
+{"id":"a10","query":"my aadhaar is 2345 6789 0123 and folio 12345678","expect_route":"PII"}
+{"id":"a11","query":"OTP is 448291, and my account number is 76543210","expect_route":"PII"}
+{"id":"a12","query":"email me at ramesh@example.com","expect_route":"PII"}
+{"id":"a13","query":"What is the NAV of HDFC Large Cap today?","expect_route":"OUT_OF_SCOPE"}
+{"id":"a14","query":"call me on 9876543210 about the exit load","expect_route":"PII"}
+{"id":"a15","query":"What is the exit load on HDFC Large Cap?","expect_route":"FACTUAL"}

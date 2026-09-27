@@ -1,0 +1,12 @@
+sentence-transformers
+chromadb
+streamlit
+requests
+beautifulsoup4
+lxml
+python-dotenv
+pyyaml
+httpx
+pytest
+tqdm
+# rank-bm25          # optional, only for retrieval.mode: hybrid (Phase 5 stretch)

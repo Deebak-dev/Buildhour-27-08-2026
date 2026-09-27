@@ -1,0 +1,90 @@
+corpus:
+  manifest: ingest/sources.csv
+  raw_dir: data/raw
+  clean_dir: data/clean
+
+chunking:
+  strategy: auto            # auto | faq_pair | table_row | label_value | narrative
+  target_tokens: 600
+  min_tokens: 200
+  max_tokens: 800
+  overlap_pct: 12
+
+embedding:
+  model: sentence-transformers/all-MiniLM-L6-v2
+  dimension: 384
+  normalize: true
+  batch_size: 32
+
+vectorstore:
+  backend: chromadb
+  persist_dir: data/chroma
+  collection: mf_faq_chroma
+  rebuild_on_dimension_change: true
+
+retrieval:
+  mode: vector              # vector | hybrid
+  top_k: 10               # LLM context window: chunks shown to the model (see below)
+  over_fetch: 10            # frozen Phase 5 operating point (see below)
+  similarity_floor: 0.35    # frozen Phase 5 operating point
+  field_type_boost: 0.35    # frozen Phase 5 operating point
+  field_misfit_penalty: 0.15  # demote off-topic "other schemes" chunks (see below)
+  scheme_filter: strict
+
+# Phase 5 tuning (NFR-8, A21) - frozen against eval/golden_set.jsonl at
+# corpus=1055 chunks, giving recall@5 = 6/10. Do not retune without re-running
+# `python -m eval.recall`.
+#
+# over_fetch had to rise from 2 to 10 and field_type_boost from 0.05 to 0.35
+# because ~91% of this corpus is holdings and "also manages these schemes"
+# noise, all of which embeds close to any query naming a fund. The correct fact
+# chunk ("Expense ratio: 1.03%") ranked 9th-13th before boosting, outside the
+# old 7-candidate pool. A boost large enough to reorder a 0.75-vs-0.48 gap is
+# not a subtle number: it is compensating for corpus noise. Cleaning the noise
+# at source (Phase 3 chunker) would let these values fall back to small ones.
+#
+# The floor is insensitive in 0.30-0.40 at this boost, so 0.35 is kept as the
+# documented value rather than over-fitted to the noise level.
+#
+# field_misfit_penalty (Phase 9) attacks the same noise from the other side.
+# Boosting can only promote the right chunk so far; on golden q02 a scheme_type
+# "also manages these schemes" chunk still won at 0.773 vs 0.751. When a field
+# intent is detected, chunks tagged scheme_type are off-topic by construction, so
+# they are demoted by this much instead. Golden top-1 goes 5/10 -> 6/10 and is
+# flat for every value in 0.05-0.40, so 0.15 is a plateau midpoint, not a fit.
+# 6/10 is the corpus ceiling, not the ceiling of this parameter.
+#
+# top_k (Phase 9) is the LLM context window: build_context renders every chunk
+# in the trace, so this many chunks reach the prompt. Raised 5 -> 10. Row-level
+# eval is unchanged (21/25 both ways, recall still 6/10 and corpus-capped), but
+# the wider window changes what happens on a zero-evidence field. At k=5, golden
+# q10 (direct vs regular expense ratio, which has no chunks at all) produced a
+# NON-ANSWER that still carried a Source: line and a freshness line, because the
+# citation is rendered from the top retrieved chunk's metadata regardless of
+# whether that chunk contains the answer. It passed all 8 validators and was
+# reported degraded=False. At k=10 the model sees enough of the neighbourhood to
+# notice the field is simply absent and refuses plainly. So k=10 makes the system
+# more honest, not more accurate - and it lowers the generation-check count
+# (36/39 -> 33/39) because 3 of those checks reward a citation on a refusal.
+# Treat that drop as a measurement artefact, not a regression. Cost: input
+# tokens per generation roughly double. Set top_k: 5 to A/B.
+
+generation:
+  provider: ${LLM_PROVIDER} # pluggable, one env var
+  model: ${LLM_MODEL}
+  temperature: 0.0          # determinism for the demo
+  max_sentences: 3
+  max_retries: 2
+  structured_output: true
+
+guardrails:
+  pii_screen: enabled
+  allowlist_from_manifest: true
+  log_raw_queries: false
+
+answer:
+  freshness_label: "Last updated from sources:"
+  date_format: "%d %b %Y"
+  # Fixed SEBI investor-education URL used by the ADVICE refusal. It is
+  # configuration, not prose, so it can be audited in one place (Phase 6 §2).
+  education_url: "https://www.sebi.gov.in/investor-education"

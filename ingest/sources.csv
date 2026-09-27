@@ -1,0 +1,12 @@
+source_id,scheme,category,doc_type,title,publisher,url,enabled
+hdfc-large-cap__groww_scheme,hdfc_large_cap,large_cap,scheme_page,"HDFC Large Cap Fund - Direct Growth",groww,https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth,1
+hdfc-flexi-cap__groww_scheme,hdfc_flexi_cap,flexi_cap,scheme_page,"HDFC Equity Fund - Direct Growth (Flexi Cap)",groww,https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth,1
+hdfc-elss__groww_scheme,hdfc_elss,elss,scheme_page,"HDFC ELSS Tax Saver Fund - Direct Growth",groww,https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth,1
+hdfc-small-cap__groww_scheme,hdfc_small_cap,small_cap,scheme_page,"HDFC Small Cap Fund - Direct Growth",groww,https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth,1
+hdfc-balanced-advantage__groww_scheme,hdfc_balanced_advantage,hybrid,scheme_page,"HDFC Balanced Advantage Fund - Direct Growth",groww,https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth,1
+hdfc-large-cap__factsheet,hdfc_large_cap,large_cap,factsheet,"HDFC Large Cap Fund - Factsheet (primary)",hdfc_amc,TODO_PRIMARY_URL,0
+hdfc-elss__kim,hdfc_elss,elss,kim,"HDFC ELSS Tax Saver Fund - Key Information Memorandum (primary)",hdfc_amc,TODO_PRIMARY_URL,0
+hdfc-small-cap__sid,hdfc_small_cap,small_cap,sid,"HDFC Small Cap Fund - Scheme Information Document (primary)",hdfc_amc,TODO_PRIMARY_URL,0
+hdfc-amc__statement_download_guide,all,general,statement_guide,"HDFC AMC - How to download statements and tax documents (primary)",hdfc_amc,TODO_PRIMARY_URL,0
+sebi__investor_education,all,general,faq,"SEBI - Mutual fund investor education (primary)",sebi,TODO_PRIMARY_URL,0
+amfi__investor_faq,all,general,faq,"AMFI - Mutual fund investor FAQ (primary)",amfi,TODO_PRIMARY_URL,0
